@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clean Shopper — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       DESIGN TOKENS
+       ======================================== */
+    :root {
+      /* Primary (Sage Green) */
+      --color-primary-50: #EFF5F1;
+      --color-primary-100: #D7E8DC;
+      --color-primary-200: #B0D1BA;
+      --color-primary-300: #88BA97;
+      --color-primary-400: #6AA47A;
+      --color-primary-500: #528C63;
+      --color-primary-600: #437350;
+      --color-primary-700: #345A3E;
+      --color-primary-800: #25412D;
+      --color-primary-900: #16281B;
+
+      /* Accent (Soft Teal) */
+      --color-accent-50: #EDF6F6;
+      --color-accent-100: #D0E8E8;
+      --color-accent-200: #A3D1D1;
+      --color-accent-300: #76BABA;
+      --color-accent-400: #5BA8A8;
+      --color-accent-500: #4A9494;
+      --color-accent-600: #3D7D7D;
+      --color-accent-700: #2D6363;
+
+      /* Sand (Warm Surfaces) */
+      --color-sand-50: #FDFBF8;
+      --color-sand-100: #F9F5EE;
+      --color-sand-200: #F1EBDF;
+      --color-sand-300: #E5DDD0;
+      --color-sand-400: #D4C9B8;
+
+      /* Neutrals (Warm-tinted) */
+      --color-neutral-50: #FAFAF8;
+      --color-neutral-100: #F5F4F2;
+      --color-neutral-200: #E8E7E4;
+      --color-neutral-300: #D4D2CE;
+      --color-neutral-400: #B0ADA8;
+      --color-neutral-500: #8C8983;
+      --color-neutral-600: #6B6862;
+      --color-neutral-700: #4A4843;
+      --color-neutral-800: #2E2C28;
+      --color-neutral-900: #1A1917;
+
+      /* Semantic */
+      --color-success: #3D8B5E;
+      --color-warning: #D4A843;
+      --color-error: #C75450;
+      --color-info: #5A8FB8;
+
+      /* Surfaces */
+      --surface-page: #F9F5EE;
+      --surface-card: #FFFFFF;
+      --surface-secondary: #F1EBDF;
+      --surface-overlay: rgba(42, 40, 36, 0.4);
+
+      /* Typography */
+      --font-primary: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --text-display: 3rem;
+      --text-h1: 2.4rem;
+      --text-h2: 1.875rem;
+      --text-h3: 1.5rem;
+      --text-h4: 1.25rem;
+      --text-body: 1rem;
+      --text-small: 0.875rem;
+      --text-caption: 0.75rem;
+
+      --weight-regular: 400;
+      --weight-medium: 500;
+      --weight-semibold: 600;
+      --weight-bold: 700;
+
+      --leading-tight: 1.1;
+      --leading-snug: 1.2;
+      --leading-normal: 1.35;
+      --leading-relaxed: 1.6;
+
+      --tracking-tight: -0.02em;
+      --tracking-snug: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.04em;
+
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+
+      /* Layout */
+      --content-max-width: 960px;
+      --page-margin-desktop: 4rem;
+      --page-margin-mobile: 1.5rem;
+
+      /* Shape */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(42, 40, 36, 0.06);
+      --shadow-md: 0 4px 12px rgba(42, 40, 36, 0.08);
+      --shadow-lg: 0 8px 24px rgba(42, 40, 36, 0.12);
+
+      /* Motion */
+      --duration-fast: 120ms;
+      --duration-normal: 200ms;
+      --duration-slow: 350ms;
+      --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+      --ease-in: cubic-bezier(0.42, 0, 1, 1);
+      --ease-out: cubic-bezier(0, 0, 0.58, 1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+        --duration-fast: 0ms;
+        --duration-normal: 0ms;
+        --duration-slow: 0ms;
+      }
+    }
+
+    /* ========================================
+       BASE STYLES
+       ======================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      line-height: var(--leading-relaxed);
+      color: var(--color-neutral-700);
+      background-color: var(--surface-page);
+    }
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+    .page {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: var(--space-12) var(--page-margin-desktop);
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: var(--space-8) var(--page-margin-mobile);
+      }
+    }
+
+    section {
+      margin-bottom: var(--space-16);
+    }
+
+    /* ========================================
+       TYPOGRAPHY — PAGE ELEMENTS
+       ======================================== */
+    .section-title {
+      font-size: var(--text-h2);
+      font-weight: var(--weight-semibold);
+      line-height: var(--leading-snug);
+      letter-spacing: var(--tracking-snug);
+      color: var(--color-neutral-800);
+      margin-bottom: var(--space-8);
+      padding-bottom: var(--space-3);
+      border-bottom: 2px solid var(--color-primary-200);
+    }
+
+    .subsection-title {
+      font-size: var(--text-h4);
+      font-weight: var(--weight-semibold);
+      line-height: var(--leading-normal);
+      color: var(--color-neutral-700);
+      margin-bottom: var(--space-4);
+      margin-top: var(--space-8);
+    }
+
+    p {
+      margin-bottom: var(--space-4);
+    }
+
+    /* ========================================
+       HEADER
+       ======================================== */
+    .header {
+      text-align: center;
+      margin-bottom: var(--space-16);
+      padding: var(--space-16) 0 var(--space-12);
+    }
+
+    .header-title {
+      font-size: var(--text-display);
+      font-weight: var(--weight-bold);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-3);
+    }
+
+    .header-subtitle {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-neutral-500);
+      margin-bottom: var(--space-8);
+    }
+
+    .header-direction {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: var(--text-body);
+      line-height: var(--leading-relaxed);
+      color: var(--color-neutral-600);
+    }
+
+    /* ========================================
+       PRINCIPLES
+       ======================================== */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .principle-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-neutral-200);
+    }
+
+    .principle-name {
+      font-size: var(--text-h4);
+      font-weight: var(--weight-semibold);
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-2);
+    }
+
+    .principle-desc {
+      font-size: var(--text-small);
+      color: var(--color-neutral-600);
+      line-height: var(--leading-relaxed);
+      margin-bottom: 0;
+    }
+
+    /* ========================================
+       COLOR SWATCHES
+       ======================================== */
+    .swatch-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .swatch {
+      width: 140px;
+      height: 88px;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-2) var(--space-3);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swatch-label {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-medium);
+      line-height: 1.3;
+    }
+
+    .swatch-hex {
+      font-size: 0.6875rem;
+      opacity: 0.8;
+    }
+
+    .swatch--light .swatch-label,
+    .swatch--light .swatch-hex {
+      color: var(--color-neutral-800);
+    }
+
+    .swatch--dark .swatch-label,
+    .swatch--dark .swatch-hex {
+      color: #FFFFFF;
+    }
+
+    /* Semantic swatches */
+    .semantic-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .semantic-swatch {
+      width: 120px;
+      height: 72px;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-2) var(--space-3);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Neutral strip */
+    .neutral-strip {
+      display: flex;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-6);
+    }
+
+    .neutral-block {
+      flex: 1;
+      min-width: 0;
+      height: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: var(--space-1) var(--space-1) var(--space-2);
+    }
+
+    .neutral-block span {
+      font-size: 0.625rem;
+      font-weight: var(--weight-medium);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Surface nesting demo */
+    .surface-demo {
+      background: var(--surface-page);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      border: 1px dashed var(--color-neutral-300);
+      margin-bottom: var(--space-6);
+    }
+
+    .surface-demo-label {
+      font-size: var(--text-caption);
+      color: var(--color-neutral-500);
+      margin-bottom: var(--space-4);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .surface-card-demo {
+      background: var(--surface-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+    }
+
+    .surface-elevated-demo {
+      background: var(--surface-secondary);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    /* ========================================
+       TYPE SPECIMENS
+       ======================================== */
+    .type-specimen {
+      margin-bottom: var(--space-8);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--color-neutral-200);
+    }
+
+    .type-specimen:last-child {
+      border-bottom: none;
+    }
+
+    .type-sample {
+      color: var(--color-neutral-800);
+      margin-bottom: var(--space-2);
+    }
+
+    .type-meta {
+      font-size: var(--text-caption);
+      color: var(--color-neutral-500);
+      letter-spacing: var(--tracking-wide);
+      font-weight: var(--weight-medium);
+    }
+
+    /* ========================================
+       SPACING BARS
+       ======================================== */
+    .spacing-bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-3);
+      gap: var(--space-4);
+    }
+
+    .spacing-label {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-medium);
+      color: var(--color-neutral-600);
+      width: 100px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .spacing-bar {
+      height: 28px;
+      background: var(--color-primary-100);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-primary-200);
+      display: flex;
+      align-items: center;
+      padding-left: var(--space-2);
+    }
+
+    .spacing-bar span {
+      font-size: 0.625rem;
+      color: var(--color-primary-700);
+      font-weight: var(--weight-medium);
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       SHAPE EXAMPLES
+       ======================================== */
+    .shape-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    .shape-example {
+      text-align: center;
+    }
+
+    .shape-box {
+      width: 96px;
+      height: 64px;
+      background: var(--color-primary-100);
+      border: 2px solid var(--color-primary-300);
+      margin-bottom: var(--space-2);
+    }
+
+    .shape-label {
+      font-size: var(--text-caption);
+      color: var(--color-neutral-600);
+      font-weight: var(--weight-medium);
+    }
+
+    .shadow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      margin-bottom: var(--space-6);
+    }
+
+    .shadow-example {
+      text-align: center;
+    }
+
+    .shadow-box {
+      width: 160px;
+      height: 100px;
+      background: var(--surface-card);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-2);
+    }
+
+    .shadow-box-label {
+      font-size: var(--text-caption);
+      color: var(--color-neutral-500);
+      font-weight: var(--weight-medium);
+    }
+
+    /* ========================================
+       MOTION
+       ======================================== */
+    .motion-tokens {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .motion-token-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      border: 1px solid var(--color-neutral-200);
+    }
+
+    .motion-token-name {
+      font-size: var(--text-small);
+      font-weight: var(--weight-semibold);
+      color: var(--color-neutral-700);
+      margin-bottom: var(--space-1);
+    }
+
+    .motion-token-value {
+      font-size: var(--text-caption);
+      color: var(--color-accent-600);
+      font-weight: var(--weight-medium);
+      margin-bottom: var(--space-2);
+    }
+
+    .motion-token-usage {
+      font-size: var(--text-caption);
+      color: var(--color-neutral-500);
+      line-height: 1.4;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      text-align: center;
+      padding: var(--space-8) 0;
+      border-top: 1px solid var(--color-neutral-200);
+      margin-top: var(--space-16);
+    }
+
+    .footer p {
+      font-size: var(--text-caption);
+      color: var(--color-neutral-400);
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+      <h1 class="header-title">Clean Shopper</h1>
+      <p class="header-subtitle">Design System v1.0 &middot; April 4, 2026</p>
+      <p class="header-direction">
+        Trustworthy, approachable, and grounded in a wellness sensibility. The visual language communicates credibility through generous spacing, muted natural color, and clean typography — like a knowledgeable friend who happens to be an ingredient expert.
+      </p>
+    </header>
+
+    <!-- ==================== DESIGN PRINCIPLES ==================== -->
+    <section>
+      <h2 class="section-title">Design Principles</h2>
+      <div class="principles-grid">
+        <div class="principle-card">
+          <p class="principle-name">Trust through clarity</p>
+          <p class="principle-desc">Every element earns its place. Clean layouts, honest color, and readable typography signal that the information here is reliable.</p>
+        </div>
+        <div class="principle-card">
+          <p class="principle-name">Warm expertise</p>
+          <p class="principle-desc">The interface feels like getting advice from someone who genuinely cares. Warm tones and generous spacing prevent ingredient analysis from feeling clinical.</p>
+        </div>
+        <div class="principle-card">
+          <p class="principle-name">Generous breathing room</p>
+          <p class="principle-desc">White space is a feature. Spacious layouts reduce cognitive load and let users focus on what matters — assessments, comparisons, and recommendations.</p>
+        </div>
+        <div class="principle-card">
+          <p class="principle-name">Quiet confidence</p>
+          <p class="principle-desc">The design doesn't shout. Hierarchy is established through spacing and weight rather than size and saturation. Credibility comes from substance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== COLOR PALETTE ==================== -->
+    <section>
+      <h2 class="section-title">Color Palette</h2>
+
+      <h3 class="subsection-title">Primary — Sage Green</h3>
+      <div class="swatch-row">
+        <div class="swatch swatch--light" style="background: var(--color-primary-50);">
+          <span class="swatch-label">primary-50</span>
+          <span class="swatch-hex">#EFF5F1</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-primary-100);">
+          <span class="swatch-label">primary-100</span>
+          <span class="swatch-hex">#D7E8DC</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-primary-200);">
+          <span class="swatch-label">primary-200</span>
+          <span class="swatch-hex">#B0D1BA</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-primary-300);">
+          <span class="swatch-label">primary-300</span>
+          <span class="swatch-hex">#88BA97</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-primary-400);">
+          <span class="swatch-label">primary-400</span>
+          <span class="swatch-hex">#6AA47A</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-primary-500);">
+          <span class="swatch-label">primary-500</span>
+          <span class="swatch-hex">#528C63</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-primary-600);">
+          <span class="swatch-label">primary-600</span>
+          <span class="swatch-hex">#437350</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-primary-700);">
+          <span class="swatch-label">primary-700</span>
+          <span class="swatch-hex">#345A3E</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-primary-800);">
+          <span class="swatch-label">primary-800</span>
+          <span class="swatch-hex">#25412D</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-primary-900);">
+          <span class="swatch-label">primary-900</span>
+          <span class="swatch-hex">#16281B</span>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Accent — Soft Teal</h3>
+      <div class="swatch-row">
+        <div class="swatch swatch--light" style="background: var(--color-accent-50);">
+          <span class="swatch-label">accent-50</span>
+          <span class="swatch-hex">#EDF6F6</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-accent-100);">
+          <span class="swatch-label">accent-100</span>
+          <span class="swatch-hex">#D0E8E8</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-accent-200);">
+          <span class="swatch-label">accent-200</span>
+          <span class="swatch-hex">#A3D1D1</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-accent-300);">
+          <span class="swatch-label">accent-300</span>
+          <span class="swatch-hex">#76BABA</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-accent-400);">
+          <span class="swatch-label">accent-400</span>
+          <span class="swatch-hex">#5BA8A8</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-accent-500);">
+          <span class="swatch-label">accent-500</span>
+          <span class="swatch-hex">#4A9494</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-accent-600);">
+          <span class="swatch-label">accent-600</span>
+          <span class="swatch-hex">#3D7D7D</span>
+        </div>
+        <div class="swatch swatch--dark" style="background: var(--color-accent-700);">
+          <span class="swatch-label">accent-700</span>
+          <span class="swatch-hex">#2D6363</span>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Sand — Warm Surfaces</h3>
+      <div class="swatch-row">
+        <div class="swatch swatch--light" style="background: var(--color-sand-50); border: 1px solid var(--color-neutral-200);">
+          <span class="swatch-label">sand-50</span>
+          <span class="swatch-hex">#FDFBF8</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-sand-100); border: 1px solid var(--color-neutral-200);">
+          <span class="swatch-label">sand-100</span>
+          <span class="swatch-hex">#F9F5EE</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-sand-200); border: 1px solid var(--color-neutral-200);">
+          <span class="swatch-label">sand-200</span>
+          <span class="swatch-hex">#F1EBDF</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-sand-300); border: 1px solid var(--color-neutral-200);">
+          <span class="swatch-label">sand-300</span>
+          <span class="swatch-hex">#E5DDD0</span>
+        </div>
+        <div class="swatch swatch--light" style="background: var(--color-sand-400); border: 1px solid var(--color-neutral-200);">
+          <span class="swatch-label">sand-400</span>
+          <span class="swatch-hex">#D4C9B8</span>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Semantic Colors</h3>
+      <div class="semantic-row">
+        <div class="semantic-swatch swatch--dark" style="background: var(--color-success);">
+          <span class="swatch-label">Success</span>
+          <span class="swatch-hex">#3D8B5E</span>
+        </div>
+        <div class="semantic-swatch swatch--dark" style="background: var(--color-warning);">
+          <span class="swatch-label">Warning</span>
+          <span class="swatch-hex">#D4A843</span>
+        </div>
+        <div class="semantic-swatch swatch--dark" style="background: var(--color-error);">
+          <span class="swatch-label">Error</span>
+          <span class="swatch-hex">#C75450</span>
+        </div>
+        <div class="semantic-swatch swatch--dark" style="background: var(--color-info);">
+          <span class="swatch-label">Info</span>
+          <span class="swatch-hex">#5A8FB8</span>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Neutral Scale</h3>
+      <div class="neutral-strip">
+        <div class="neutral-block" style="background: var(--color-neutral-50);">
+          <span style="color: var(--color-neutral-700);">50</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-100);">
+          <span style="color: var(--color-neutral-700);">100</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-200);">
+          <span style="color: var(--color-neutral-700);">200</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-300);">
+          <span style="color: var(--color-neutral-700);">300</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-400);">
+          <span style="color: var(--color-neutral-800);">400</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-500);">
+          <span style="color: #FFFFFF;">500</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-600);">
+          <span style="color: #FFFFFF;">600</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-700);">
+          <span style="color: #FFFFFF;">700</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-800);">
+          <span style="color: #FFFFFF;">800</span>
+        </div>
+        <div class="neutral-block" style="background: var(--color-neutral-900);">
+          <span style="color: #FFFFFF;">900</span>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Surface Hierarchy</h3>
+      <div class="surface-demo">
+        <p class="surface-demo-label">Page Background — sand-100</p>
+        <div class="surface-card-demo">
+          <p class="surface-demo-label" style="margin-bottom: var(--space-2);">Card Surface — white</p>
+          <p style="font-size: var(--text-small); color: var(--color-neutral-600); margin-bottom: var(--space-4);">Primary content lives on white cards elevated above the warm sand page background, creating clear visual separation.</p>
+          <div class="surface-elevated-demo">
+            <p class="surface-demo-label">Secondary Surface — sand-200</p>
+            <p style="font-size: var(--text-small); color: var(--color-neutral-500); margin-bottom: 0;">Nested or secondary content uses the sand-200 surface for subtle grouping within cards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TYPOGRAPHY ==================== -->
+    <section>
+      <h2 class="section-title">Typography</h2>
+      <p style="color: var(--color-neutral-600); margin-bottom: var(--space-8);">
+        Poppins throughout — modern and friendly, with enough weight range to create clear hierarchy without a second typeface. Geometric construction reads as precise; rounded terminals read as warm.
+      </p>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-display); font-weight: var(--weight-bold); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); color: var(--color-primary-700);">Clean Shopper</p>
+        <p class="type-meta">display &middot; 3rem / 48px &middot; 700 &middot; 1.1 &middot; -0.02em</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-h1); font-weight: var(--weight-bold); line-height: var(--leading-snug); letter-spacing: var(--tracking-tight);">Your Ingredient Research Assistant</p>
+        <p class="type-meta">h1 &middot; 2.4rem / 38.4px &middot; 700 &middot; 1.2 &middot; -0.02em</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-h2); font-weight: var(--weight-semibold); line-height: 1.25; letter-spacing: var(--tracking-snug);">Product Safety Assessment</p>
+        <p class="type-meta">h2 &middot; 1.875rem / 30px &middot; 600 &middot; 1.25 &middot; -0.01em</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-h3); font-weight: var(--weight-semibold); line-height: 1.3; letter-spacing: var(--tracking-snug);">Ingredient Breakdown</p>
+        <p class="type-meta">h3 &middot; 1.5rem / 24px &middot; 600 &middot; 1.3 &middot; -0.01em</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-h4); font-weight: var(--weight-semibold); line-height: var(--leading-normal);">Cleaning Products</p>
+        <p class="type-meta">h4 &middot; 1.25rem / 20px &middot; 600 &middot; 1.35 &middot; 0</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-body); font-weight: var(--weight-regular); line-height: var(--leading-relaxed);">This laundry detergent scores well across all major safety databases. Its plant-based surfactant system is free from known irritants, and the fragrance is derived from essential oils rather than synthetic compounds.</p>
+        <p class="type-meta">body &middot; 1rem / 16px &middot; 400 &middot; 1.6 &middot; 0</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-small); font-weight: var(--weight-regular); line-height: 1.5; color: var(--color-neutral-600);">EWG Verified &middot; USDA Organic &middot; B Corp Certified</p>
+        <p class="type-meta">small &middot; 0.875rem / 14px &middot; 400 &middot; 1.5 &middot; 0</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-sample" style="font-size: var(--text-caption); font-weight: var(--weight-regular); line-height: 1.5; letter-spacing: var(--tracking-wide); color: var(--color-neutral-500);">Last updated 3 hours ago &middot; Source: EWG Skin Deep</p>
+        <p class="type-meta">caption &middot; 0.75rem / 12px &middot; 400 &middot; 1.5 &middot; 0.04em</p>
+      </div>
+    </section>
+
+    <!-- ==================== SPACING ==================== -->
+    <section>
+      <h2 class="section-title">Spacing Scale</h2>
+      <p style="color: var(--color-neutral-600); margin-bottom: var(--space-8);">
+        8px base unit. Generous spacing is a core principle — white space reduces cognitive load and communicates confidence.
+      </p>
+
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-1</span>
+        <div class="spacing-bar" style="width: 4px; min-width: 40px;"><span>4px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-2</span>
+        <div class="spacing-bar" style="width: 8px; min-width: 48px;"><span>8px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-3</span>
+        <div class="spacing-bar" style="width: 12px; min-width: 56px;"><span>12px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-4</span>
+        <div class="spacing-bar" style="width: 80px;"><span>16px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-6</span>
+        <div class="spacing-bar" style="width: 120px;"><span>24px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-8</span>
+        <div class="spacing-bar" style="width: 160px;"><span>32px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-10</span>
+        <div class="spacing-bar" style="width: 200px;"><span>40px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-12</span>
+        <div class="spacing-bar" style="width: 240px;"><span>48px</span></div>
+      </div>
+      <div class="spacing-bar-row">
+        <span class="spacing-label">space-16</span>
+        <div class="spacing-bar" style="width: 320px;"><span>64px</span></div>
+      </div>
+    </section>
+
+    <!-- ==================== SHAPE ==================== -->
+    <section>
+      <h2 class="section-title">Shape &amp; Elevation</h2>
+
+      <h3 class="subsection-title">Border Radius</h3>
+      <div class="shape-row">
+        <div class="shape-example">
+          <div class="shape-box" style="border-radius: var(--radius-sm);"></div>
+          <p class="shape-label">radius-sm<br>6px</p>
+        </div>
+        <div class="shape-example">
+          <div class="shape-box" style="border-radius: var(--radius-md);"></div>
+          <p class="shape-label">radius-md<br>10px</p>
+        </div>
+        <div class="shape-example">
+          <div class="shape-box" style="border-radius: var(--radius-lg);"></div>
+          <p class="shape-label">radius-lg<br>16px</p>
+        </div>
+        <div class="shape-example">
+          <div class="shape-box" style="border-radius: var(--radius-full); width: 64px; height: 64px;"></div>
+          <p class="shape-label">radius-full<br>9999px</p>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Shadows</h3>
+      <div class="shadow-row">
+        <div class="shadow-example">
+          <div class="shadow-box" style="box-shadow: var(--shadow-sm);">
+            <span class="shadow-box-label">shadow-sm</span>
+          </div>
+        </div>
+        <div class="shadow-example">
+          <div class="shadow-box" style="box-shadow: var(--shadow-md);">
+            <span class="shadow-box-label">shadow-md</span>
+          </div>
+        </div>
+        <div class="shadow-example">
+          <div class="shadow-box" style="box-shadow: var(--shadow-lg);">
+            <span class="shadow-box-label">shadow-lg</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MOTION ==================== -->
+    <section>
+      <h2 class="section-title">Motion</h2>
+      <p style="color: var(--color-neutral-600); margin-bottom: var(--space-8);">
+        Restrained and purposeful. Animations confirm actions and guide attention without calling attention to themselves. Things ease in and settle naturally — nothing bounces, nothing overshoots.
+      </p>
+
+      <h3 class="subsection-title">Duration</h3>
+      <div class="motion-tokens">
+        <div class="motion-token-card">
+          <p class="motion-token-name">duration-fast</p>
+          <p class="motion-token-value">120ms</p>
+          <p class="motion-token-usage">Button hover, toggle, focus ring</p>
+        </div>
+        <div class="motion-token-card">
+          <p class="motion-token-name">duration-normal</p>
+          <p class="motion-token-value">200ms</p>
+          <p class="motion-token-usage">Panel expand, tab switch, fade in</p>
+        </div>
+        <div class="motion-token-card">
+          <p class="motion-token-name">duration-slow</p>
+          <p class="motion-token-value">350ms</p>
+          <p class="motion-token-usage">Modal open/close, page transitions</p>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Easing</h3>
+      <div class="motion-tokens">
+        <div class="motion-token-card">
+          <p class="motion-token-name">ease-default</p>
+          <p class="motion-token-value">cubic-bezier(0.25, 0.1, 0.25, 1.0)</p>
+          <p class="motion-token-usage">General-purpose: balanced entry and exit</p>
+        </div>
+        <div class="motion-token-card">
+          <p class="motion-token-name">ease-in</p>
+          <p class="motion-token-value">cubic-bezier(0.42, 0, 1, 1)</p>
+          <p class="motion-token-usage">Elements exiting the view</p>
+        </div>
+        <div class="motion-token-card">
+          <p class="motion-token-name">ease-out</p>
+          <p class="motion-token-value">cubic-bezier(0, 0, 0.58, 1)</p>
+          <p class="motion-token-usage">Elements entering the view</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p>Generated by /design-system-generator &middot; April 4, 2026</p>
+    </footer>
+
+  </div>
+</body>
+</html>
