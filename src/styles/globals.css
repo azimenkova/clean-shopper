@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Primary (Sage Green) --- */
+  --color-primary-50: #EFF5F1;
+  --color-primary-100: #D7E8DC;
+  --color-primary-200: #B0D1BA;
+  --color-primary-300: #88BA97;
+  --color-primary-400: #6AA47A;
+  --color-primary-500: #528C63;
+  --color-primary-600: #437350;
+  --color-primary-700: #345A3E;
+  --color-primary-800: #25412D;
+  --color-primary-900: #16281B;
+
+  /* --- Accent (Soft Teal) --- */
+  --color-accent-50: #EDF6F6;
+  --color-accent-100: #D0E8E8;
+  --color-accent-200: #A3D1D1;
+  --color-accent-300: #76BABA;
+  --color-accent-400: #5BA8A8;
+  --color-accent-500: #4A9494;
+  --color-accent-600: #3D7D7D;
+  --color-accent-700: #2D6363;
+
+  /* --- Sand (Warm Surfaces) --- */
+  --color-sand-50: #FDFBF8;
+  --color-sand-100: #F9F5EE;
+  --color-sand-200: #F1EBDF;
+  --color-sand-300: #E5DDD0;
+  --color-sand-400: #D4C9B8;
+
+  /* --- Neutrals (Warm-tinted) --- */
+  --color-neutral-50: #FAFAF8;
+  --color-neutral-100: #F5F4F2;
+  --color-neutral-200: #E8E7E4;
+  --color-neutral-300: #D4D2CE;
+  --color-neutral-400: #B0ADA8;
+  --color-neutral-500: #8C8983;
+  --color-neutral-600: #6B6862;
+  --color-neutral-700: #4A4843;
+  --color-neutral-800: #2E2C28;
+  --color-neutral-900: #1A1917;
+
+  /* --- Semantic --- */
+  --color-success-light: #EBF5EF;
+  --color-success: #3D8B5E;
+  --color-success-dark: #2D6844;
+  --color-warning-light: #FDF5E6;
+  --color-warning: #D4A843;
+  --color-warning-dark: #A07D2F;
+  --color-error-light: #FAEDED;
+  --color-error: #C75450;
+  --color-error-dark: #9C3F3C;
+  --color-info-light: #EBF2F8;
+  --color-info: #5A8FB8;
+  --color-info-dark: #436B8A;
+
+  /* --- Surfaces --- */
+  --surface-page: #F9F5EE;
+  --surface-card: #FFFFFF;
+  --surface-secondary: #F1EBDF;
+  --surface-overlay: rgba(42, 40, 36, 0.4);
+
+  /* --- Typography --- */
+  --font-primary: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+
+  --text-display: 3rem;
+  --text-h1: 2.4rem;
+  --text-h2: 1.875rem;
+  --text-h3: 1.5rem;
+  --text-h4: 1.25rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-caption: 0.75rem;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.2;
+  --leading-normal: 1.35;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.5;
+
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+
+  /* --- Spacing --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* --- Layout --- */
+  --content-max-width: 1120px;
+  --page-margin-desktop: 4rem;
+  --page-margin-mobile: 1.5rem;
+
+  /* --- Shape --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* --- Borders --- */
+  --border-default: 1px solid var(--color-neutral-200);
+  --border-subtle: 1px solid var(--color-neutral-100);
+  --focus-ring: 2px solid var(--color-accent-500);
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 3px rgba(42, 40, 36, 0.06);
+  --shadow-md: 0 4px 12px rgba(42, 40, 36, 0.08);
+  --shadow-lg: 0 8px 24px rgba(42, 40, 36, 0.12);
+
+  /* --- Motion --- */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 350ms;
+  --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  --ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+  }
+}
