@@ -352,7 +352,7 @@ Not included in V1. The warm sand-and-sage palette was designed for light mode. 
 
 1. **Tailwind integration strategy.** Tokens are defined as CSS custom properties — decide whether to extend `tailwind.config.js` to reference these variables or maintain a parallel Tailwind theme. [Assumed — extend Tailwind config to consume CSS custom properties for single source of truth.]
 2. **Semantic color shades.** Success, warning, error, and info are defined as single values. If components need light/dark variants (e.g., tinted alert backgrounds), a 3-stop scale per semantic color should be added. [Assumed — single value sufficient for V1.]
-3. **Icon style.** No icon library selected. Recommend a rounded/friendly icon set (Phosphor, Lucide) to match the shape language. [Decision needed.]
+3. **Icon style.** Lucide React (`lucide-react`) selected. Rounded 2px strokes with round caps/joins match the "softly rounded, friendly" shape language. Tree-shakeable named imports, `size` prop for consistent sizing, `currentColor` default for Tailwind `text-*` color classes. [Resolved.]
 4. **Ingredient safety color mapping.** The product rates ingredients on a safety spectrum — decide whether to use the semantic palette (green/yellow/red) or a dedicated safety-specific scale. [Decision needed.]
 
 ---

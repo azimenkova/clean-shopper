@@ -22,6 +22,7 @@ Single-user app. No authentication in V1. Local state plus Supabase for data per
 - State: React useState and useContext only. No Redux, no Zustand.
 - File naming: kebab-case for all non-component files
 - Styling: Use Tailwind theme classes for all design token values. Never hardcode hex colors, pixel font sizes, or spacing values in components. If a needed token does not exist in the Tailwind config, add it there rather than hardcoding the value. This means bg-primary not #2D7B5E, text-h3 not text-lg, p-lg not p-4.
+- Components: Always check /docs/component-spec.md before building any UI element. If an existing component covers the use case, use it. Only create a new component if no spec covers the pattern, and add the new component to component-spec.md before moving on.
 
 ## Do Not
 - Do not add user authentication or account features -- V1 is single-user only
@@ -31,11 +32,11 @@ Single-user app. No authentication in V1. Local state plus Supabase for data per
 - Do not use any AI model other than claude-sonnet-4-20250514
 
 ## References
-- Component library: See /docs/component-spec.md -- use existing components before creating new ones
 - Build plan: See /docs/build-plan.md -- build phase by phase, do not jump ahead
 - Project context: See /docs/project-context.md -- full project intake and design decisions
 - Prompt optimizer: Use /prompt-optimizer to evaluate and refine instructions before sending them
 - Tailwind config: See tailwind.config.js for design tokens as Tailwind theme extensions. Always use theme classes, never hardcode values.
+- Component spec: See /docs/component-spec.md — use existing components before creating new ones. Follow the spec for props, states, and visual structure.
 
 ## Design System
 
